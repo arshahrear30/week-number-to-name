@@ -1,0 +1,73 @@
+package com.timeforschool.problem;
+
+import android.os.Bundle;
+import android.provider.BlockedNumberContract;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+
+import soup.neumorphism.NeumorphButton;
+
+public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
+        setContentView(R.layout.activity_main);
+
+
+        EditText ednumb=findViewById(R.id.ednum);
+        Button edresult=findViewById(R.id.edresult);
+
+
+        TextView tvdisplays=findViewById(R.id.tvdisplay);
+
+        edresult.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(ednumb.length() >0  )
+                {
+
+
+                int ednumber=Integer.parseInt(ednumb.getText().toString());
+
+                if (ednumber==1) tvdisplays.setText(ednumber+ " indicates that it is a Saturday ");
+                else if (ednumber==2) tvdisplays.setText(ednumber+ " indicates that it is a Sunday ");
+                else if (ednumber==3) tvdisplays.setText(ednumber+ " indicates that it is a Monday ");
+                else if (ednumber==4) tvdisplays.setText(ednumber+ " indicates that it is a Tuesday ");
+                else if (ednumber==5) tvdisplays.setText(ednumber+ " indicates that it is a Wednesday ");
+                else if (ednumber==6) tvdisplays.setText(ednumber+ " indicates that it is a Thursday ");
+                else if (ednumber==7) tvdisplays.setText(ednumber+ " indicates that it is a Friday ");
+
+
+                else tvdisplays.setText(("This number is not a week number."));
+                    }else{
+
+                        ednumb.setError("Do not indicate the week number with a number greater than 7.");
+
+                    }
+
+
+
+            }
+        });
+
+
+
+
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
+    }
+}
